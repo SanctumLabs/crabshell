@@ -1,3 +1,5 @@
+# CrabShell
+
 [![progress-banner](https://backend.codecrafters.io/progress/shell/31b0b29e-1230-4fbf-8518-b362a2b9cf08)](https://app.codecrafters.io/users/BrianLusina?r=2qF)
 
 This is a starting point for Rust solutions to the
