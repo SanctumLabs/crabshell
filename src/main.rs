@@ -26,7 +26,7 @@ fn main() {
             Command::EchoCommand {display} => println!("{}", display),
             Command::TypeCommand {command_name} => {
                 if BUILT_IN_COMMANDS.contains(&command_name.as_str()) {
-                    println!("{}: is a shell built in", command_name);
+                    println!("{} is a shell builtin", command_name);
                 } else {
                     println!("{}: command not found", command_name);
                 }
