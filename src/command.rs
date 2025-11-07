@@ -10,7 +10,9 @@ pub enum Command {
 impl Command {
     pub(crate) fn from_input(input: &str) -> Self {
         let input = input.trim();
-        if input.contains("exit") {
+        let command: Vec<&str> = input.split(" ").collect();
+
+        if command[0] == ("exit") {
             return Self::ExitCommand;
         };
 
