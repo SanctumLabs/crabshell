@@ -2,6 +2,7 @@
 
 [![Build](https://github.com/SanctumLabs/crabshell/actions/workflows/build.yml/badge.svg)](https://github.com/SanctumLabs/crabshell/actions/workflows/build.yml)
 [![Test](https://github.com/SanctumLabs/crabshell/actions/workflows/tests.yml/badge.svg)](https://github.com/SanctumLabs/crabshell/actions/workflows/tests.yml)
+[![Lint](https://github.com/SanctumLabs/crabshell/actions/workflows/lint.yml/badge.svg)](https://github.com/SanctumLabs/crabshell/actions/workflows/lint.yml)
 [![Release](https://github.com/SanctumLabs/crabshell/actions/workflows/release.yml/badge.svg)](https://github.com/SanctumLabs/crabshell/actions/workflows/release.yml)
 
 This is a shell built using [Rust](https://rust-lang.org/)
