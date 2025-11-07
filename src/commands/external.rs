@@ -7,20 +7,23 @@ pub(crate) fn external_cmd(cmd: &Command) {
         eprintln!("Unexpected error occurred while executing external command");
         return;
     };
-    let output = StdCommand::new(path)
+    let mut process = StdCommand::new(path)
         .args(args.split(' '))
-        .output()
-        .expect("failed to execute process");
-    io::stdout().write_all(&output.stdout).unwrap();
-    io::stderr().write_all(&output.stderr).unwrap();
+        .spawn()
+        .unwrap();
+
+    process.wait().unwrap();
+    // io::stdout().write_all(&output.stdout).unwrap();
+    // io::stderr().write_all(&output.stderr).unwrap();
 }
 
 pub(crate) fn parse_external_cmd(cmd: &str, args: &str) -> Option<Command> {
     let Ok(path_env) = std::env::var("PATH") else {
         return None;
     };
+    let paths = path_env.split(':');
 
-    for dir in path_env.split(':') {
+    for dir in paths {
         let full_path = format!("{}/{}", dir, cmd);
         let path = std::path::Path::new(&full_path);
         if path.exists() {
