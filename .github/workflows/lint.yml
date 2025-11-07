@@ -1,0 +1,19 @@
+name: Lint
+
+on:
+  - push
+  - pull_request
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  lint:
+    strategy:
+      matrix:
+        PROFILE: [release]
+    name: Lint
+    uses: SanctumLabs/ci-workflows/.github/workflows/rust-lint.yml@main
+    with:
+      profile: ${{ matrix.PROFILE }}
