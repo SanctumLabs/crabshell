@@ -1,5 +1,5 @@
 use super::Command::{self, *};
-use std::{io, io::Write, process::Command as StdCommand};
+use std::{process::Command as StdCommand};
 use std::os::unix::fs::PermissionsExt;
 
 pub(crate) fn external_cmd(input_command: &Command) {
@@ -7,8 +7,6 @@ pub(crate) fn external_cmd(input_command: &Command) {
         eprintln!("Unexpected error occurred while executing external command");
         return;
     };
-    // let command_parts: Vec<&str> = path.trim().split_whitespace().collect();
-    // let command = command_parts[0];
 
     let mut process = StdCommand::new(cmd)
         .args(args.split(' '))
@@ -16,8 +14,6 @@ pub(crate) fn external_cmd(input_command: &Command) {
         .unwrap();
 
     process.wait().unwrap();
-    // io::stdout().write_all(&output.stdout).unwrap();
-    // io::stderr().write_all(&output.stderr).unwrap();
 }
 
 pub(crate) fn parse_external_cmd(cmd: &str, args: &str) -> Option<Command> {
