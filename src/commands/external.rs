@@ -1,6 +1,7 @@
 use super::Command::{self, *};
 use std::os::unix::fs::PermissionsExt;
 use std::process::Command as StdCommand;
+use crate::utils::string_utils::tokenize;
 
 pub(crate) fn external_cmd(input_command: &Command) {
     let External { args, cmd, .. } = input_command else {
@@ -8,7 +9,8 @@ pub(crate) fn external_cmd(input_command: &Command) {
         return;
     };
 
-    let mut process = StdCommand::new(cmd).args(args.split(' ')).spawn().unwrap();
+    let arg_list = tokenize(args);
+    let mut process = StdCommand::new(cmd).args(arg_list).spawn().unwrap();
 
     process.wait().unwrap();
 }
