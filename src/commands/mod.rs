@@ -1,12 +1,12 @@
 use error::CommandError;
 
-pub(crate) mod cd;
-pub(crate) mod echo;
-pub(crate) mod error;
-pub(crate) mod exit;
-pub(crate) mod external;
-pub(crate) mod pwd;
-pub(crate) mod typee;
+pub mod cd;
+pub mod echo;
+pub mod error;
+pub mod exit;
+pub mod external;
+pub mod pwd;
+pub mod typee;
 
 pub enum Command {
     Noop,

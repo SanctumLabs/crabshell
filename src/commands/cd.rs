@@ -1,6 +1,6 @@
 use super::{Command, CommandError};
 
-pub(crate) fn cd_cmd(args: &str) {
+pub fn cd_cmd(args: &str) {
     use std::env::{set_current_dir, var};
     let args = match args {
         "~" => var("HOME").unwrap_or("/".into()),
@@ -12,6 +12,6 @@ pub(crate) fn cd_cmd(args: &str) {
     }
 }
 
-pub(crate) fn parse_cd_cmd(args: &str) -> Result<Command, CommandError> {
+pub fn parse_cd_cmd(args: &str) -> Result<Command, CommandError> {
     Ok(Command::Cd(args.to_owned()))
 }

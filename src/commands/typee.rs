@@ -1,6 +1,6 @@
 use super::{Command, CommandError};
 
-pub(crate) fn type_cmd(command: &str) {
+pub fn type_cmd(command: &str) {
     use Command::*;
     if command.is_empty() {
         eprint!("");
@@ -19,7 +19,7 @@ pub(crate) fn type_cmd(command: &str) {
     };
 }
 
-pub(crate) fn parse_type_cmd(args: &str) -> Result<Command, CommandError> {
+pub fn parse_type_cmd(args: &str) -> Result<Command, CommandError> {
     let args = args.trim();
     Ok(Command::Type(args.to_owned()))
 }

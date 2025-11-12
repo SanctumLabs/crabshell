@@ -7,7 +7,7 @@ use crate::utils::string_utils::tokenize;
 /// # Arguments
 ///
 /// * `args` - The string to be printed to standard output.
-pub(crate) fn echo_cmd(args: &str) {
+pub fn echo_cmd(args: &str) {
     println!("{}", args);
 }
 
@@ -22,7 +22,7 @@ pub(crate) fn echo_cmd(args: &str) {
 ///
 /// * `Ok(Command::Echo(processed_string))` where processed_string has quotes handled and whitespace collapsed.
 /// * `Err(CommandError)` if parsing fails (should not occur for echo).
-pub(crate) fn parse_echo_cmd(args: &str) -> Result<Command, CommandError> {
+pub fn parse_echo_cmd(args: &str) -> Result<Command, CommandError> {
     // Use tokenizer to handle single quotes and collapse unquoted whitespace.
     let tokens = tokenize(args);
     let processed = tokens.join(" ");
