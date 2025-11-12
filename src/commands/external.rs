@@ -1,7 +1,7 @@
 use super::Command::{self, *};
+use crate::utils::string_utils::tokenize;
 use std::os::unix::fs::PermissionsExt;
 use std::process::Command as StdCommand;
-use crate::utils::string_utils::tokenize;
 
 pub(crate) fn external_cmd(input_command: &Command) {
     let External { args, cmd, .. } = input_command else {

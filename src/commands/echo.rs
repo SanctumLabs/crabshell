@@ -1,5 +1,5 @@
-use crate::utils::string_utils::tokenize;
 use super::{Command, CommandError};
+use crate::utils::string_utils::tokenize;
 
 /// Executes the echo command.
 /// This function prints its argument string to stdout, as in the shell.

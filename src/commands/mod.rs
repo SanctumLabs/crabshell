@@ -1,7 +1,6 @@
 use error::CommandError;
 
 pub(crate) mod cd;
-pub(crate) mod constants;
 pub(crate) mod echo;
 pub(crate) mod error;
 pub(crate) mod exit;
