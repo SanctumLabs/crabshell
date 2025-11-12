@@ -14,7 +14,5 @@ updates:
         - "dependencies"
         - "cargo"
         - "rust"
-      assignees:
-        - dependabot
       reviewers:
         - "BrianLusina"
