@@ -22,10 +22,28 @@ pub fn tokenize(input: &str) -> Vec<String> {
             continue;
         }
         if in_double {
-            if ch == '"' {
-                in_double = false;
-            } else {
-                current.push(ch);
+            match ch {
+                '"' => {
+                    in_double = false;
+                }
+                '\\' => {
+                    // Inside double quotes, backslash only escapes certain characters
+                    if let Some(next_ch) = iter.next() {
+                        match next_ch {
+                            '"' | '\\' | '$' | '`' => current.push(next_ch),
+                            '\n' => { /* line continuation: swallow both */ }
+                            _ => {
+                                // For all other chars, keep the backslash literally
+                                current.push('\\');
+                                current.push(next_ch);
+                            }
+                        }
+                    } else {
+                        // Trailing backslash inside double quotes -> literal backslash
+                        current.push('\\');
+                    }
+                }
+                _ => current.push(ch),
             }
             continue;
         }
