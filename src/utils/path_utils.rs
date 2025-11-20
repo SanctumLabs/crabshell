@@ -2,7 +2,7 @@ use std::env;
 use std::io::{Error, ErrorKind};
 use std::path::PathBuf;
 
-
+#[allow(dead_code)]
 pub fn get_exec_path_string(exec: &str) -> Result<String, Error> {
     for path in env::var("PATH").unwrap().split(":") {
         let path = format!("{}/{}", path, exec);
@@ -12,7 +12,10 @@ pub fn get_exec_path_string(exec: &str) -> Result<String, Error> {
         }
     }
 
-    Err(Error::new(ErrorKind::NotFound, format!("{}: command not found", exec)))
+    Err(Error::new(
+        ErrorKind::NotFound,
+        format!("{}: command not found", exec),
+    ))
 }
 
 /// Gets the executable path of the passed in executable file and runs it if exists
@@ -37,5 +40,8 @@ pub fn get_executable_path(exec: &str) -> Result<PathBuf, Error> {
         }
     }
 
-    Err(Error::new(ErrorKind::NotFound, format!("{exec}: command not found")))
+    Err(Error::new(
+        ErrorKind::NotFound,
+        format!("{exec}: command not found"),
+    ))
 }

@@ -1,3 +1,5 @@
+use crate::utils::path_utils;
+use crate::utils::string_utils::tokenize;
 use error::CommandError;
 
 pub mod cd;
@@ -39,9 +41,14 @@ impl Command {
     pub fn from(input: &str) -> Result<Self, CommandError> {
         use Command::*;
 
-        let input = input.trim().splitn(2, ' ').collect::<Vec<&str>>();
-        let cmd = input.get(0).copied().unwrap_or("");
-        let args = input.get(1).copied().unwrap_or("");
+        let tokens = tokenize(input.trim());
+        let cmd = tokens.first().map(|s| s.as_str()).unwrap_or("");
+        let args = if tokens.len() > 1 {
+            tokens[1..].join(" ")
+        } else {
+            String::new()
+        };
+        let args = args.as_str();
         Ok(match cmd {
             "" => Noop,
             "echo" => echo::parse_echo_cmd(args)?,
@@ -51,7 +58,23 @@ impl Command {
             "cd" => cd::parse_cd_cmd(args)?,
             _ => match external::parse_external_cmd(cmd, args) {
                 Some(cmd) => cmd,
-                None => return Err(CommandError::NotFound(cmd.to_string())),
+                None => {
+                    let result = path_utils::get_executable_path(cmd);
+                    match result {
+                        Ok(path_buffer) => External {
+                            cmd: cmd.to_string(),
+                            args: args.to_string(),
+                            path: path_buffer
+                                .file_name()
+                                .unwrap()
+                                .to_str()
+                                .unwrap()
+                                .to_string(),
+                        },
+                        Err(_err) => Noop,
+                    };
+                    return Err(CommandError::NotFound(cmd.to_string()));
+                }
             },
         })
     }
