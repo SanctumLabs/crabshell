@@ -9,6 +9,7 @@ macro_rules! fdbg {
     ($fmt:expr, $($arg:tt)*) => (format!("{} {}", format!("{}:{}", file!(), line!()), format!($fmt, $($arg)*)));
 }
 
+#[allow(dead_code)]
 pub fn setup() -> anyhow::Result<()> {
     color_eyre::install().expect("Unable to setup color eyre");
     let subscriber = tracing_subscriber::fmt()
